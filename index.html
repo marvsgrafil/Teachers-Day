@@ -90,8 +90,7 @@
     <p>We hope you’ll never get tired of supporting and guiding us as we continue to learn and chase our dreams. 
     You truly make a difference in our lives, Ma’am.</p>
     <p><strong>Once again, Happy World Teachers’ Day, Ma’am Joana!</strong>  
-    Thank you for everything — for your guidance, care, and love that mean more to us than words can express.
-    Love from Mars❤️</p>
+    Thank you for everything — for your guidance, care, and love that mean more to us than words can express.</p>
 
     <div>
       <img src="513937854_1904007180450891_5372780685515137715_n.jpg" alt="">
@@ -178,92 +177,3 @@
   </script>
 </body>
 </html>
-</p>
-
-    <div>
-      <img src="513937854_1904007180450891_5372780685515137715_n.jpg" alt="">
-      <img src="549361608_2012118319563309_7505761309596586756_n.jpg" alt="">
-      <img src="533764750_1435014404281978_3333375569809833053_n.jpg" alt="">
-    </div>
-  </div>
-
-  <canvas id="confetti"></canvas>
-
-  <script>
-    const symbols = ['🍎','📘','✏️','🎓','📚','🌷','❤️','⭐'];
-    let cards = [...symbols, ...symbols].sort(() => 0.5 - Math.random());
-    const game = document.getElementById('game');
-    const message = document.getElementById('message');
-    let firstCard = null, secondCard = null, lockBoard = false, matches = 0;
-
-    cards.forEach(symbol => {
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.dataset.symbol = symbol;
-      card.addEventListener('click', flipCard);
-      game.appendChild(card);
-    });
-
-    function flipCard() {
-      if (lockBoard || this.classList.contains('flipped')) return;
-      this.textContent = this.dataset.symbol;
-      this.classList.add('flipped');
-      if (!firstCard) firstCard = this;
-      else {
-        secondCard = this;
-        lockBoard = true;
-        if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
-          matches++;
-          resetBoard();
-          if (matches === symbols.length) {
-            showMessage();
-          }
-        } else {
-          setTimeout(() => {
-            firstCard.textContent = '';
-            secondCard.textContent = '';
-            firstCard.classList.remove('flipped');
-            secondCard.classList.remove('flipped');
-            resetBoard();
-          }, 700);
-        }
-      }
-    }
-    function resetBoard() {
-      [firstCard, secondCard, lockBoard] = [null, null, false];
-    }
-    function showMessage() {
-      message.style.display = 'block';
-      startConfetti();
-    }
-
-    // Confetti animation
-    const confetti = document.getElementById("confetti");
-    const ctx = confetti.getContext("2d");
-    confetti.width = window.innerWidth;
-    confetti.height = window.innerHeight;
-    const pieces = Array.from({length: 200}, () => ({
-      x: Math.random() * confetti.width,
-      y: Math.random() * confetti.height - confetti.height,
-      size: Math.random() * 6 + 2,
-      color: `hsl(${Math.random()*360},100%,70%)`,
-      speed: Math.random() * 3 + 2
-    }));
-    function startConfetti() {
-      function draw() {
-        ctx.clearRect(0,0,confetti.width,confetti.height);
-        pieces.forEach(p => {
-          ctx.fillStyle = p.color;
-          ctx.fillRect(p.x, p.y, p.size, p.size);
-          p.y += p.speed;
-          if (p.y > confetti.height) p.y = -10;
-        });
-        requestAnimationFrame(draw);
-      }
-      draw();
-    }
-  </script>
-</body>
-</html>
-
-
